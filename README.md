@@ -1,6 +1,4 @@
-##  Auricdefence
-
-# Decentralized Cybersecurity Incident Reporting System
+##  Auricdefence:  Decentralized Cybersecurity Incident Reporting System
 
 ---
 
