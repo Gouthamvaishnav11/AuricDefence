@@ -1,8 +1,8 @@
-##  Auricdefence:  Decentralized Cybersecurity Incident Reporting System
+#  AuricDefence:  Decentralized Cybersecurity Incident Reporting System
 
 
 
-## 🚀 Project Overview:
+# #🚀 Project Overview:
 
 The growing reliance on digital systems has led to an unprecedented increase in cybersecurity incidents, including data breaches, ransomware attacks, and phishing scams. Unfortunately, current systems for reporting and managing these incidents are:
 
@@ -23,9 +23,10 @@ Auricdefence is a decentralized platform aiming to transform cybersecurity incid
 ✅ Trustless sharing of threat intelligence
 
 ✅ Incentives for proactive reporting
+
 ---
 
-# ⚠️ Problem Statement:
+## ⚠️ Problem Statement:
 Modern cybersecurity incident reporting systems suffer from:
 
 - Centralized Control: Traditional platforms store data in centralized databases, making them susceptible to breaches or misuse.
@@ -42,7 +43,7 @@ Modern cybersecurity incident reporting systems suffer from:
 
 ---
 
-# 🛠️ Solution Overview:
+## 🛠️ Solution Overview:
 Auricdefence introduces a Decentralized Cybersecurity Incident Reporting System, powered by blockchain and web technologies. The system enables:
 
 
@@ -59,10 +60,13 @@ Auricdefence introduces a Decentralized Cybersecurity Incident Reporting System,
 - Transparent Auditing: Blockchain logs every action, enabling regulatory compliance and user trust.
 
 - Interoperability: The system is designed to integrate with external cybersecurity tools and regulatory portals.
+
+
+  
 ---
 
 
-# 🔐 Key Features
+## 🔐 Key Features
 
 - Decentralized Storage: Incident records stored on blockchain for immutability
 
