@@ -1,7 +1,5 @@
  ## AuricDefence
 
----
-
 ## 📌 **Project Overview**
 
 ### Can you give an overview of your recent project?
