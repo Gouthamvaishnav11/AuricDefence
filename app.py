@@ -26,8 +26,10 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
     role = db.Column(db.String(50), default='user')  # e.g., admin/user
     reports = db.relationship('ReportSubmission', backref='user', lazy=True)
-    blogs = db.relationship('BlogPost', backref='author', lazy=True)
     settings = db.relationship('UserSettings', backref='user', uselist=False)
+    plan = db.Column(db.String(50), default="Free")
+    signup_date = db.Column(db.DateTime, default=datetime.utcnow)
+    has_active_subscription = db.Column(db.Boolean, default=False)
 
 # 2. User Settings Model
 class UserSettings(db.Model):
@@ -138,12 +140,23 @@ def login():
 
 
 
-@app.route("/dashboard")
+@app.route('/dashboard')
 def dashboard():
-    if "user_id" not in session:
-        flash("Please log in first", "warning")
-        return redirect(url_for("login"))
-    return render_template("dashboard.html", username=session.get("username"))
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user = User.query.get(session['user_id'])
+
+    # Calculate trial period end date
+    trial_end = user.signup_date + timedelta(days=7)
+
+    # Check if trial expired and user has no active subscription
+    if not user.has_active_subscription and datetime.utcnow() > trial_end:
+        return render_template('limit.html', user=user)  # limit.html shows plan expired message
+
+    # If still in trial or subscribed, show dashboard
+    return render_template("dashboard.html", username=user.username)
+
 
 @app.route("/logout")
 def logout():
