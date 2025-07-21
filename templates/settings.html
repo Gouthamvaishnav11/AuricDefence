@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <!-- Montserrat Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #1a1d2b;
+      --bg-secondary: #2a2a2a;
+      --bg-tertiary: #333333;
+      --bg-quaternary: #3a3f4f;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+      --text-tertiary: #8a8a8a;
+      --accent-primary: #246dec;
+      --accent-secondary: #cc3c43;
+      --accent-hover: #1b4eb5;
+      --accent-danger: #a02a33;
+      --border-color: #444444;
+      --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: "Montserrat", sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    
+    .grid-container {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      grid-template-rows: 70px 1fr;
+      grid-template-areas:
+        "sidebar header"
+        "sidebar main";
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    header.header {
+      grid-area: header;
+      background: var(--bg-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+    }
+    
+    aside.sidebar {
+      grid-area: sidebar;
+      background-color: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 20px;
+      height: 100%;
+      overflow-y: auto;
+      border-right: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+    }
+    
+    .sidebar h2 {
+      color: var(--text-primary);
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.5px;
+    }
+    
+    .sidebar h2 .material-icons-outlined {
+      margin-right: 8px;
+      font-size: 28px;
+      color: var(--accent-primary);
+    }
+    
+    .sidebar a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      margin-bottom: 6px;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: var(--transition);
+      border-left: 3px solid transparent;
+    }
+    
+    .sidebar a span.material-icons-outlined {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+    
+    .sidebar a:hover, .sidebar a.active {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--text-primary);
+      border-left-color: var(--accent-primary);
+    }
+    
+    .sidebar a.active {
+      background-color: rgba(36, 109, 236, 0.15);
+      font-weight: 500;
+    }
+    
+    main.main-container {
+      grid-area: main;
+      padding: 30px;
+      overflow-y: auto;
+      background-color: var(--bg-primary);
+    }
+    
+    .main-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .settings-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 30px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .settings-section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.35);
+    }
+    
+    .settings-section h3 {
+      margin-top: 0;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+    }
+    
+    .settings-section label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-size: 14px;
+      letter-spacing: 0.2px;
+    }
+    
+    .settings-section input,
+    .settings-section select {
+      width: 100%;
+      padding: 14px 16px;
+      margin-top: 8px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      font-family: inherit;
+      font-size: 15px;
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+    
+    .settings-section input:focus,
+    .settings-section select:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(36, 109, 236, 0.2);
+    }
+    
+    .settings-section button {
+      background-color: var(--accent-primary);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-right: 12px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .settings-section button:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+      z-index: -1;
+    }
+    
+    .settings-section button:hover:before {
+      left: 100%;
+    }
+    
+    .settings-section button:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .settings-section button.delete-btn {
+      background-color: var(--accent-secondary);
+    }
+    
+    .settings-section button.delete-btn:hover {
+      background-color: var(--accent-danger);
+    }
+    
+    p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 15px 0;
+      line-height: 1.6;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      flex: 1;
+    }
+    
+    .header-icon {
+      font-size: 24px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .header-icon:hover {
+      color: var(--text-primary);
+      transform: scale(1.1);
+    }
+    
+    .badge {
+      background-color: var(--accent-primary);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-left: 8px;
+    }
+    
+    .divider {
+      height: 1px;
+      background-color: var(--border-color);
+      margin: 20px 0;
+    }
+    
+    .help-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 12px;
+      background-color: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 10px 16px;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    
+    .help-button:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+    
+    .settings-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-primary), transparent);
+      opacity: 0.3;
+      transition: opacity 0.3s;
+    }
+    
+    .settings-section:hover::before {
+      opacity: 0.7;
+    }
+    
+    .settings-section h3::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--accent-primary);
+      margin-top: 8px;
+      border-radius: 3px;
+    }
+    
+    .settings-section:nth-child(odd) {
+      background: var(--bg-quaternary);
+    }
+    
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+          "header"
+          "main";
+      }
+      
+      aside.sidebar {
+        display: none;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2><span class="material-icons-outlined"></span> AuricDefence</h2>
+      <a href="/dashboard"><span class="material-icons-outlined">dashboard</span> Dashboard</a>
+      <a href="/reportsubmit"><span class="material-icons-outlined">report</span> Report Incident</a>
+      <a href="/threat-intelligence"><span class="material-icons-outlined">search</span> Threat Intelligence</a>
+      <a href="/blockchain-ledger"><span class="material-icons-outlined">account_balance_wallet</span> Blockchain Ledger</a>
+      <a href="/compliancereport"><span class="material-icons-outlined">assessment</span> Compliance Reports</a>
+
+      <!-- Settings Submenu -->
+      <a href="#profile-settings" ><span class="material-icons-outlined">person</span> Profile Settings</a>
+      <a href="#security-settings"><span class="material-icons-outlined">lock</span> Security</a>
+      <a href="#notifications-settings"><span class="material-icons-outlined">notifications</span> Notifications</a>
+      <a href="#data-privacy-settings"><span class="material-icons-outlined">privacy_tip</span> Data Privacy</a>
+      <a href="#help-support"><span class="material-icons-outlined">help_outline</span> Help & Support</a>
+    </aside>
+    
+    <!-- Header -->
+    <header class="header">
+      <div>
+        <span class="material-icons-outlined header-icon">menu</span>
+      </div>
+      <div>
+        <span class="material-icons-outlined header-icon">notifications</span>
+        <span class="material-icons-outlined header-icon">account_circle</span>
+      </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main-container">
+      <div class="main-title">
+        <span class="material-icons-outlined">settings</span>
+        Settings
+      </div>
+      
+      <!-- Profile Settings -->
+      <form method="POST" action="{{ url_for('save_profile_settings') }}">
+        <div class="settings-section" id="profile-settings">
+          <h3>
+            <span class="material-icons-outlined">person</span>
+            Profile Settings
+          </h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="username">Name</label>
+              <input type="text" id="username" name="username" placeholder="Enter your name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="Your phone number" />
+            </div>
+          </div>
+          <button type="submit">
+            <span class="material-icons-outlined">save</span>
+            Save Profile
+          </button>
+        </div>
+      </form>
+      
+      <!-- Security Settings -->
+      <form method="POST" action="{{ url_for('save_security_settings') }}">
+        <div class="settings-section" id="security-settings">
+          <h3>
+            <span class="material-icons-outlined">security</span>
+            Security
+          </h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Change Password</label>
+              <input type="password" id="password" name="password" placeholder="New password" />
+            </div>
+            <div class="form-group">
+              <label for="twofa">Enable Two-Factor Authentication (2FA)</label>
+              <select id="twofa" name="twofa">
+                <option value="enabled">Enabled</option>
+                <option value="disabled">Disabled</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">
+            <span class="material-icons-outlined">update</span>
+            Update Security
+          </button>
+        </div>
+      </form>
+      
+      <!-- Notifications Settings -->
+      <form method="POST" action="{{ url_for('save_notifications_settings') }}">
+        <div class="settings-section" id="notifications-settings">
+          <h3>
+            <span class="material-icons-outlined">notifications</span>
+            Notifications
+          </h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email-alerts">Email Alerts</label>
+              <select id="email-alerts" name="email_alerts">
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sms-alerts">SMS Alerts</label>
+              <select id="sms-alerts" name="sms_alerts">
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="frequency">Alert Frequency</label>
+              <select id="frequency" name="frequency">
+                <option value="instant">Instant</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">
+            <span class="material-icons-outlined">notifications_active</span>
+            Save Notifications
+          </button>
+        </div>
+      </form>
+      
+      <!-- Data Privacy Settings -->
+      <form method="POST" action="{{ url_for('download_data') }}">
+        <div class="settings-section" id="data-privacy-settings">
+          <h3>
+            <span class="material-icons-outlined">privacy_tip</span>
+            Data Privacy
+          </h3>
+          <p>Download your personal data or delete your account. Your data is encrypted and stored securely.</p>
+          <button type="submit">
+            <span class="material-icons-outlined">download</span>
+            Download Data
+          </button>
+        </div>
+      </form>
+      
+      <form method="POST" action="{{ url_for('delete_account') }}">
+        <div class="settings-section">
+          <button class="delete-btn" type="submit">
+            <span class="material-icons-outlined">delete</span>
+            Delete Account
+          </button>
+        </div>
+      </form>
+      
+      <!-- Help & Support -->
+      <div class="settings-section" id="help-support">
+        <h3>
+          <span class="material-icons-outlined">help</span>
+          Help & Support
+        </h3>
+        <p>If you have questions, contact our support team or check our frequently asked questions.</p>
+        <a href="{{ url_for('contact_support') }}" class="help-button">
+          <span class="material-icons-outlined">mail</span>
+          Contact Support
+        </a>
+        <a href="{{ url_for('view_faqs') }}" class="help-button">
+          <span class="material-icons-outlined">question_answer</span>
+          View FAQs
+        </a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

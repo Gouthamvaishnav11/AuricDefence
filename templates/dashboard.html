@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    /* [same CSS from your original code] */
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #e6e8ed;
+      color: #666666;
+      font-family: "Montserrat", sans-serif;
+    }
+    .material-icons-outlined {
+      vertical-align: middle;
+      line-height: 1px;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: 260px 1fr 1fr 1fr;
+      grid-template-rows: 0.2fr 3fr;
+      grid-template-areas:
+        "sidebar header header header"
+        "sidebar main main main";
+      height: 100vh;
+    }
+    .header {
+      grid-area: header;
+      height: 70px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    }
+    .menu-icon {
+      display: none;
+    }
+    #sidebar {
+      grid-area: sidebar;
+      background-color: #21232d;
+      color: #9799ab;
+      overflow-y: auto;
+      transition: all 0.5s;
+    }
+    .sidebar-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+    .sidebar-brand {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .sidebar-list {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar-list-item {
+      padding: 20px;
+    }
+    .sidebar-list-item:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+    }
+    .sidebar-list-item>a {
+      text-decoration: none;
+      color: #9799ab;
+    }
+    .sidebar-submenu {
+      display: none;
+      list-style: none;
+      padding-left: 20px;
+    }
+    .main-container {
+      grid-area: main;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .main-title {
+      display: flex;
+      justify-content: space-between;
+    }
+    .main-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .card {
+      padding: 25px;
+      background-color: #fff;
+      border: 1px solid #d2d2d3;
+      border-radius: 5px;
+      box-shadow: 0 6px 7px -4px rgba(0, 0, 0, 0.2);
+    }
+    .card-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .charts-card {
+      background-color: #fff;
+      padding: 25px;
+      border: 1px solid #d2d2d3;
+      border-radius: 5px;
+    }
+    .chart-title {
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #4f35a1;
+      border-radius: 10px;
+    }
+    @media screen and (max-width: 992px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.2fr 3fr;
+        grid-template-areas:
+          "header"
+          "main";
+      }
+      #sidebar {
+        display: none;
+      }
+      .menu-icon {
+        display: inline;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      .main-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .charts {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-container">
+    <header class="header">
+      <div class="menu-icon" onclick="openSidebar()">
+        <span class="material-icons-outlined">menu</span>
+      </div>
+      <div class="header-left">
+        <span class="material-icons-outlined">search</span>
+      </div>
+      <div class="header-right">
+        <span class="material-icons-outlined">notifications</span>
+        <span class="material-icons-outlined">email</span>
+        <span class="material-icons-outlined">account_circle</span>
+      </div>
+    </header>
+
+    <aside id="sidebar">
+      <div class="sidebar-title">
+        <div class="sidebar-brand">
+          <span class="material-icons-outlined">security</span> AuricDefence
+        </div>
+        <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+      </div>
+      <ul class="sidebar-list">
+        <li class="sidebar-list-item">
+          <a href="/dashboard">
+            <span class="material-icons-outlined">dashboard</span> Dashboard
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="/reportsubmit">
+            <span class="material-icons-outlined">report</span> Report Incident
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="/">
+            <span class="material-icons-outlined">shield</span> Threat Intelligence
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="/blockchain-ledger">
+            <span class="material-icons-outlined">device_hub</span> Blockchain Ledger
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <a href="/compliancereport">
+            <span class="material-icons-outlined">assignment</span> Compliance Report
+          </a>
+        </li>
+        <li class="sidebar-list-item">
+          <div onclick="toggleSettingsDropdown()" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+            <span>
+              <span class="material-icons-outlined">settings</span> Settings
+            </span>
+            <span class="material-icons-outlined">expand_more</span>
+          </div>
+          <ul class="sidebar-submenu" id="settings-submenu">
+            <li class="sidebar-list-item"><a href="/settings"><span class="material-icons-outlined">person</span> Profile</a></li>
+            <li class="sidebar-list-item"><a href="/settings"><span class="material-icons-outlined">lock</span> Security</a></li>
+            <li class="sidebar-list-item"><a href="/settings"><span class="material-icons-outlined">notifications</span> Notifications</a></li>
+            <li class="sidebar-list-item"><a href="/settings"><span class="material-icons-outlined">privacy_tip</span> Data Privacy</a></li>
+            <li class="sidebar-list-item"><a href="/settings"><span class="material-icons-outlined">help_outline</span> Help & Support</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="main-container">
+      <div class="main-title">
+        <p class="font-weight-bold">DASHBOARD</p>
+      </div>
+      <div class="main-cards">
+        <div class="card">
+          <div class="card-inner">
+            <p>TOTAL INCIDENTS</p>
+            <span class="material-icons-outlined text-blue">report</span>
+          </div>
+          <span>249</span>
+        </div>
+        <div class="card">
+          <div class="card-inner">
+            <p>OPEN REPORTS</p>
+            <span class="material-icons-outlined text-orange">assignment_late</span>
+          </div>
+          <span>83</span>
+        </div>
+        <div class="card">
+          <div class="card-inner">
+            <p>THREAT FEEDS</p>
+            <span class="material-icons-outlined text-green">bug_report</span>
+          </div>
+          <span>79</span>
+        </div>
+        <div class="card">
+          <div class="card-inner">
+            <p>BLOCKCHAIN RECORDS</p>
+            <span class="material-icons-outlined text-red">link</span>
+          </div>
+          <span>56</span>
+        </div>
+      </div>
+
+      <!-- Include ApexCharts CDN -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<div class="charts">
+  <!-- Existing Chart 1 -->
+  <div class="charts-card">
+    <p class="chart-title">Top 5 Incident Types</p>
+    <div id="bar-chart"></div>
+  </div>
+
+  <!-- Existing Chart 2 -->
+  <div class="charts-card">
+    <p class="chart-title">Reports vs Threats</p>
+    <div id="area-chart"></div>
+  </div>
+
+  <!-- New Chart 1: Incidents by Type Distribution -->
+  <div class="charts-card">
+  <p class="chart-title">Incidents by Type</p>
+  <div id="incident-type-donut"></div>
+</div>
+
+  <!-- New Chart 2: Incident Timeline – Reported vs Resolved -->
+  <div class="charts-card">
+    <p class="chart-title">Incident Timeline – Reported vs Resolved</p>
+    <div id="incident-timeline"></div>
+  </div>
+</div>
+
+<!-- Charts Script -->
+<script>
+  // Top 5 Incident Types (already exists)
+  var barChartOptions = {
+    series: [{
+      data: [10, 8, 6, 4, 2]
+    }],
+    chart: {
+      type: 'bar',
+      height: 350
+    },
+    plotOptions: {
+      bar: {
+        distributed: true,
+        borderRadius: 4,
+        horizontal: false,
+        columnWidth: '40%',
+      }
+    },
+    dataLabels: { enabled: false },
+    legend: { show: false },
+    xaxis: {
+      categories: ['Malware', 'Phishing', 'DoS', 'Ransomware', 'Other'],
+    }
+  };
+  new ApexCharts(document.querySelector("#bar-chart"), barChartOptions).render();
+
+  // Reports vs Threats (already exists)
+  var areaChartOptions = {
+    series: [{
+      name: 'Reports',
+      data: [31, 40, 28, 51, 42, 109, 100, 95, 85, 76, 88, 92]
+    }, {
+      name: 'Threat Feeds',
+      data: [11, 32, 45, 32, 34, 52, 41, 49, 53, 60, 57, 62]
+    }],
+    chart: {
+      height: 350,
+      type: 'area',
+      toolbar: { show: false }
+    },
+    colors: ['#4f35a1', '#246dec'],
+    dataLabels: { enabled: false },
+    stroke: { curve: 'smooth' },
+    labels: [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ],
+    yaxis: [
+      { title: { text: 'Reports' } },
+      { opposite: true, title: { text: 'Threat Feeds' } }
+    ],
+    tooltip: { shared: true, intersect: false }
+  };
+  new ApexCharts(document.querySelector("#area-chart"), areaChartOptions).render();
+
+  // ✅ New: Incidents by Type Distribution (Bar)
+  var options = {
+    chart: {
+      type: 'donut',
+      height: 320
+    },
+    labels: [
+      'Data Breach', 'Ddos', 'Insider Threat', 'Malware',
+      'Phishing', 'Ransomware', 'Social Engineering', 'Zero Day'
+    ],
+    series: [15, 10, 12, 14, 10, 8, 11, 20],
+    colors: [
+      '#2979FF', // Data Breach - Blue
+      '#AB47BC', // Ddos - Purple
+      '#90A4AE', // Insider Threat - Gray
+      '#EF5350', // Malware - Red
+      '#FFA726', // Phishing - Orange
+      '#EC407A', // Ransomware - Pink
+      '#FF7043', // Social Engineering - Light Orange
+      '#00BCD4'  // Zero Day - Cyan
+    ],
+    legend: {
+      position: 'bottom'
+    },
+    dataLabels: {
+      enabled: false
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '60%'
+        }
+      }
+    }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#incident-type-donut"), options);
+  chart.render();
+  // ✅ New: Incident Timeline – Reported vs Resolved (Area Chart)
+  var incidentTimelineOptions = {
+    series: [
+      {
+        name: 'Reported Incidents',
+        data: [12, 19, 13, 22, 17, 25, 30, 28, 24, 21, 23, 26]
+      },
+      {
+        name: 'Resolved Incidents',
+        data: [5, 14, 10, 18, 12, 22, 27, 25, 21, 18, 19, 22]
+      }
+    ],
+    chart: {
+      type: 'area',
+      height: 350,
+      toolbar: { show: false }
+    },
+    colors: ['#FF5733', '#28B463'],
+    dataLabels: { enabled: false },
+    stroke: { curve: 'smooth' },
+    xaxis: {
+      categories: [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      ]
+    },
+    tooltip: { shared: true, intersect: false }
+  };
+  new ApexCharts(document.querySelector("#incident-timeline"), incidentTimelineOptions).render();
+
+
+
+
+  
+  function toggleSettingsDropdown() {
+    const submenu = document.getElementById('settings-submenu');
+    submenu.style.display = (submenu.style.display === 'block') ? 'none' : 'block';
+  }
+
+
+</script>
+</main>
+</div>
+</body>
+</html>

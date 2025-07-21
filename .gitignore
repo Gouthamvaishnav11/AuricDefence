@@ -1,0 +1,32 @@
+# Ignore Python virtual environment
+backend/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VS Code settings
+.vscode/
+
+# Flask instance folder
+instance/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+
+# Python egg and distribution
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints
+
+# macOS & Windows system files
+.DS_Store
+Thumbs.db

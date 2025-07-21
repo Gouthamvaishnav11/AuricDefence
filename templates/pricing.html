@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing</title>
+
+
+    <style>
+        :root {
+            --primary: #2b6cb0;
+            --primary-dark: #2c5282;
+            --accent: #f6ad55;
+            --dark: #1a202c;
+            --light: #f7fafc;
+            --gray: #e2e8f0;
+            --success: #48bb78;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color:#1a202c;
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            color: var(--light-grey);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color:#f7fafc;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .billing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            background: white;
+            padding: 0.75rem;
+            border-radius: 50px;
+            width: fit-content;
+            margin: 0 auto 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .billing-option {
+            font-weight: 600;
+            color: #718096;
+            cursor: pointer;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .billing-option.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .save-badge {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .pricing-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 360px;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        
+        .pricing-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .pricing-card .price .free {
+            color: var(--dark);
+        }
+        
+        .pricing-card .price-period {
+            font-size: 1rem;
+            color: #718096;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-card .description {
+            margin-bottom: 1.5rem;
+            color: #4a5568;
+        }
+        
+        .pricing-card .cta-button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .pricing-card .cta-button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .pricing-card .features {
+            list-style-type: none;
+        }
+        
+        .pricing-card .features li {
+            margin-bottom: 1rem;
+            padding-left: 1.75rem;
+            position: relative;
+            color: #4a5568;
+        }
+        
+        .pricing-card .features li:before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: var(--gray);
+            margin: 1.5rem 0;
+        }
+        
+        .enterprise-contact {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .enterprise-contact a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .enterprise-contact a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">AuricDefence</div>
+            <div class="tagline">Decentralized Cybersecurity Incident Reporting</div>
+            <h1>Transparent Threat Reporting Pricing</h1>
+            <p class="subtitle">Secure, blockchain-powered incident reporting that protects your data while contributing to collective cybersecurity intelligence.</p>
+        </header>
+        
+        <div class="billing-toggle">
+            <div class="billing-option active" id="monthly">Monthly</div>
+            <div class="billing-option" id="yearly">Yearly <span class="save-badge">Save 20%</span></div>
+        </div>
+        
+        <div class="pricing-cards">
+            <!-- Basic Tier -->
+            <div class="pricing-card">
+                <h2>Basic</h2>
+                <div class="price"><span class="free">Free for the 1 week</span></div>
+                    
+                <div class="price-period">For individuals & small teams</div>
+                <p class="description">Start reporting cybersecurity incidents with basic protection and transparency.</p>
+                <a href="#" class="cta-button">Get Started</a>
+                
+                <ul class="features">
+
+                    <li>2 incident reports during free week</li>
+                    <li>10 incident reports per month after upgrade</li>
+                    <li>Basic threat intelligence feed</li>
+                    <li>Priority threat updates after upgrade</li>
+                    <li>Anonymous reporting option</li>
+                    <li>Public blockchain verification</li>
+                    <li>Email support</li>
+                </ul>
+            </div>
+            
+            <!-- Professional Tier -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <h2>Professional</h2>
+                <div class="price">$<span id="pro-price">99</span></div>
+                <div class="price-period"><span id="pro-period">per month</span></div>
+                <p class="description">Comprehensive reporting for organizations with compliance needs.</p>
+                <a href="#" class="cta-button">Join the Cybervault</a>
+                
+                <ul class="features">
+                    <li>50 incident reports per month</li>
+                    <li>Advanced threat intelligence dashboard</li>
+                    <li>Regulatory compliance reporting</li>
+                    <li>Private blockchain verification</li>
+                    <li>Team collaboration features</li>
+                    <li>Priority email & chat support</li>
+                    <li>Basic analytics</li>
+                </ul>
+            </div>
+            
+            <!-- Enterprise Tier -->
+            <div class="pricing-card">
+                <h2>Enterprise</h2>
+                <div class="price">Custom</div>
+                <div class="price-period">Tailored for your organization</div>
+                <p class="description">Full-featured solution for large organizations and security teams.</p>
+                <a href="#" class="cta-button">Contact Sales</a>
+                
+                <ul class="features">
+                    <li>Unlimited incident reports</li>
+                    <li>Real-time threat intelligence API</li>
+                    <li>Custom compliance workflows</li>
+                    <li>Private, permissioned blockchain</li>
+                    <li>Advanced team management</li>
+                    <li>24/7 priority support</li>
+                    <li>Advanced analytics & reporting</li>
+                    <li>Dedicated security consultant</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="enterprise-contact">
+            <p>Need a custom solution? <a href="#">Contact our team</a> for specialized deployments, including on-premise installations and government solutions.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const monthlyBtn = document.getElementById('monthly');
+            const yearlyBtn = document.getElementById('yearly');
+            
+            const proPrice = document.getElementById('pro-price');
+            const proPeriod = document.getElementById('pro-period');
+            
+            // Set initial state (monthly active)
+            toggleBilling('monthly');
+            
+            monthlyBtn.addEventListener('click', function() {
+                toggleBilling('monthly');
+            });
+            
+            yearlyBtn.addEventListener('click', function() {
+                toggleBilling('yearly');
+            });
+            
+            function toggleBilling(period) {
+                if (period === 'monthly') {
+                    monthlyBtn.classList.add('active');
+                    yearlyBtn.classList.remove('active');
+                    
+                    // Monthly pricing
+                    proPrice.textContent = '99';
+                    proPeriod.textContent = 'per month';
+                } else {
+                    monthlyBtn.classList.remove('active');
+                    yearlyBtn.classList.add('active');
+                    
+                    // Yearly pricing (20% discount)
+                    proPrice.textContent = '79';
+                    proPeriod.textContent = 'per month, billed annually';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

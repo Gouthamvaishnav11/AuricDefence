@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features</title>
+ <!-- Montserrat Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color:#1a1a1a;
+      color: #ffffff;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      color:#ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .navbar-logo img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .navbar-menu {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .navbar-menu a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      
+      padding: 3px 5px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+
+    .navbar-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar-actions a {
+      color:#ffffff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      cursor: pointer;
+      
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    .navbar-actions a:hover {
+      
+      color: #333333;
+    }
+
+    .navbar-actions .btn-orange {
+      background-color: #f65314;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .navbar-actions .btn-orange:hover {
+      background-color: #d8430f;
+    }
+
+    /* Hero Styles */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+      color:#ffffff;
+    }
+
+    .hero-left {
+      flex: 1 1 500px;
+    }
+
+    .hero-left h4 {
+      font-size: 18px;
+      font-weight: 500;
+      color:lightcyan;
+      margin: 0 0 15px;
+    }
+
+    .hero-left h1 {
+      font-size: 42px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 30px;
+      line-height: 1.2;
+    }
+
+    .btn-orange {
+      background-color: #f65314;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 16px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-orange:hover {
+      background-color: #d8430f;
+    }
+
+    .hero-right {
+      flex: 1 1 400px;
+      padding-top: 30px;
+    }
+
+    .hero-right h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .hero-right p {
+      font-size: 16px;
+      color:#ffffff;
+      line-height: 1.6;
+      max-width: 500px;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    section h2 {
+      text-align: center;
+      color: #f65314;
+      font-weight: 700;
+      margin-bottom: 40px;
+      font-size: 30px;
+    }
+
+    .about-text, .how-text, .contact-text {
+      max-width: 800px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.7;
+      text-align: center;
+      color: #555;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card .material-icons-outlined {
+      font-size: 50px;
+      color: #f65314;
+      margin-bottom: 15px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.5;
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo">
+      <img src="/static/securologo.png"  />
+      AuricDefence
+    </a>
+    <div class="navbar-menu">
+      <a href="#features">Features</a>
+      <a href="#">Solutions</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <div class="navbar-actions">
+      <a href="#contact">Contact sales</a>
+      <a href="/login">Log in</a>
+      <a href="/signup" class="btn-orange">Sign up</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-left">
+      <h4>AuricDefence</h4>
+      <h1>Make cybersecurity incident reporting secure and decentralized</h1>
+      <a href="/login" class="btn-orange">Start Reporting</a>
+    </div>
+    <div class="hero-right">
+      <h3>No middleman needed</h3>
+      <p>Tell AuricDefence your incident details, and our decentralized system records it immutably. It’s like having an entire team of cybersecurity professionals ready to help—all with blockchain-powered trust and transparency.</p>
+    </div>
+  </section>
+
+  <!-- Introduction Section -->
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <div class="about-text">
+     AuricDefence is an innovative platform designed to revolutionize how cybersecurity incidents are reported and managed.
+      Unlike traditional systems, AuricDefence uses blockchain technology to ensure that every report is secure, anonymous,
+      and tamper-proof. Our goal is to build trust, improve transparency, and enable rapid response to cybersecurity threats
+      for individuals and organizations worldwide.
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features">
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="material-icons-outlined">security</span>
+        <div class="card-title">Decentralized Reporting</div>
+        <div class="card-desc">
+          Allows users to submit incident reports without relying on a central authority, ensuring privacy and security.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">vpn_key</span>
+        <div class="card-title">Blockchain Ledger</div>
+        <div class="card-desc">
+          Stores all reports immutably to protect evidence and build trust among stakeholders.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">visibility</span>
+        <div class="card-title">Transparency</div>
+        <div class="card-desc">
+          Users can track how reports are investigated and resolved, promoting accountability.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">sync_alt</span>
+        <div class="card-title">Secure Data Sharing</div>
+        <div class="card-desc">
+          Allows organizations to share threat intelligence while complying with data privacy laws.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">privacy_tip</span>
+        <div class="card-title">User Privacy</div>
+        <div class="card-desc">
+          Provides users with control over their personal data, including options to download or delete data.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">support_agent</span>
+        <div class="card-title">24/7 Support</div>
+        <div class="card-desc">
+          Cybersecurity experts are available around the clock to assist with any incident reports.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+  <h2>How It Works</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="material-icons-outlined">input</span>
+      <div class="card-title">Step 1: Submit Report</div>
+      <div class="card-desc">
+        Users securely submit incident details through the SafeChain portal, protecting their privacy.
+      </div>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined">lock</span>
+      <div class="card-title">Step 2: Blockchain Storage</div>
+      <div class="card-desc">
+        Reports are stored immutably on the blockchain, ensuring data integrity and tamper-proof evidence.
+      </div>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined">search</span>
+      <div class="card-title">Step 3: Investigation</div>
+      <div class="card-desc">
+        Cybersecurity experts review the report, analyze the threat, and recommend solutions.
+      </div>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined">track_changes</span>
+      <div class="card-title">Step 4: Track Progress</div>
+      <div class="card-desc">
+        Users track the progress of their reports in real-time through the SafeChain dashboard.
+      </div>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined">vpn_lock</span>
+      <div class="card-title">Step 5: Secure Communication</div>
+      <div class="card-desc">
+        All communications remain encrypted, preserving confidentiality throughout the process.
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Team Section -->
+  <section id="team">
+    <h2>Our Team</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="material-icons-outlined">code</span>
+        <div class="card-title">Web Development</div>
+        <div class="card-desc">
+          Builds user-friendly interfaces and ensures seamless interaction across all devices.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">lock</span>
+        <div class="card-title">Cybersecurity</div>
+        <div class="card-desc">
+          Investigates threats and provides solutions to secure data and systems.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">token</span>
+        <div class="card-title">Blockchain</div>
+        <div class="card-desc">
+          Designs smart contracts and blockchain integrations for data integrity and trust.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">developer_board</span>
+        <div class="card-title">System Design</div>
+        <div class="card-desc">
+          Plans system architecture and ensures efficient backend scalability.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">build_circle</span>
+        <div class="card-title">DevOps Engineer</div>
+        <div class="card-desc">
+          Handles deployment pipelines, monitoring, and infrastructure optimization.
+        </div>
+      </div>
+      <div class="card">
+        <span class="material-icons-outlined">manage_accounts</span>
+        <div class="card-title">Operations Team</div>
+        <div class="card-desc">
+          Coordinates daily activities, maintains service quality, and manages incident follow-ups.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-text">
+      Have questions or need support? Reach out to our team via <strong>support@safechain.com</strong> or visit our FAQs
+      for instant help. We’re committed to securing your digital world!
+    </div>
+  </section>
+</body>
+</html>
