@@ -24,6 +24,7 @@ class User(db.Model):
     username = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    # mobileNumber = db.Column(db.String(15), unique=True, nullable=False)
     role = db.Column(db.String(50), default='user')  # e.g., admin/user
     reports = db.relationship('ReportSubmission', backref='user', lazy=True)
     settings = db.relationship('UserSettings', backref='user', uselist=False)
@@ -46,13 +47,7 @@ class BlockchainLedger(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     details = db.Column(db.Text)
 
-# 4. Blog Post Model
-class BlogPost(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
 
 # 5. Compliance Report Model
 class ComplianceReport(db.Model):
@@ -95,6 +90,7 @@ def signup():
     if request.method == "POST":
         username = request.form.get("username")
         email = request.form.get("email")
+        # mobileNumber=request.form.get("mobileNumber")
         password = request.form.get("password")
 
         # Validate email format
@@ -241,5 +237,5 @@ def blog():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
