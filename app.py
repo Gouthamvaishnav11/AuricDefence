@@ -109,6 +109,33 @@ def send_n8n_event(event_type, username, email, ip):
             print("Response content:", e.response.text)
 
 
+
+def send_incident_report(incident_type, severity, description, date_time, reporter_name, reporter_email):
+    # Your actual n8n webhook URL (make sure no extra space)
+    webhook_url = "https://rithuvaishnav.app.n8n.cloud/webhook-test/Auricdefence-report"
+
+    payload = {
+        "incident_type": incident_type,
+        "severity": severity,
+        "description": description,
+        "date_time": date_time if date_time else datetime.utcnow().isoformat(),
+        "reporter_name": reporter_name,
+        "reporter_email": reporter_email,
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
+    try:
+        res = requests.post(webhook_url, json=payload, timeout=10)
+        res.raise_for_status()
+        print("[n8n SUCCESS]", res.text)
+        return res.json() if res.headers.get("Content-Type") == "application/json" else res.text
+    except requests.exceptions.RequestException as e:
+        print("[n8n ERROR]", e)
+        if hasattr(e, "response") and e.response is not None:
+            print("Response content:", e.response.text)
+        return None
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -200,10 +227,28 @@ def blockchain_ledger():
 def compliancereport():
     return render_template('compliancereport.html')
 
-
-@app.route('/reportsubmit')
+@app.route('/reportsubmit', methods=['GET', 'POST'])
 def reportsubmit():
-    return render_template('reportsubmit.html')
+    if request.method == 'POST':
+        # Handle submitted data
+        data = request.form.to_dict() if request.form else request.get_json()
+        
+        incident_type = data.get("incident_type")
+        severity = data.get("severity")
+        description = data.get("description")
+        date_time = data.get("date_time")
+        reporter_name = data.get("reporter_name")
+        reporter_email = data.get("reporter_email")
+
+        send_incident_report(
+            incident_type, severity, description, date_time, reporter_name, reporter_email
+        )
+
+        return render_template("reportsubmit.html", success=True)
+
+    # If GET request → show the form
+    return render_template("reportsubmit.html")
+
 
 
 @app.route('/settings', methods=['GET'])
