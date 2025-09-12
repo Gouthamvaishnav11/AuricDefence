@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IncidentReports</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet" />
   <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
 
   <style>
     :root {
@@ -27,6 +28,7 @@
       --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     * {
       margin: 0;
       padding: 0;
@@ -64,7 +66,7 @@
       font-size: 28px;
       color: var(--accent-primary);
     }
-    
+
     .sidebar nav ul {
       list-style: none;
     }
@@ -88,7 +90,7 @@
 
     .sidebar nav ul li a:hover,
     .sidebar nav ul li.active a {
-     background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
       color: var(--text-primary);
       border-left-color: var(--accent-primary);
     }
@@ -188,17 +190,21 @@
     }
   </style>
 </head>
+
 <body>
   <div class="sidebar">
     <h2><span class="material-icons-outlined">warning</span>AuricDefence</h2>
     <nav>
       <ul>
         <li><a href="/dashboard"><span class="material-icons-outlined">dashboard</span> Dashboard</a></li>
-    <li><a href="/reportsubmit"><span class="material-icons-outlined">report</span> Incident Reports</a></li>
-    <li><a href="/threat-intelligence"><span class="material-icons-outlined">search</span> Threat Intelligence</a></li>
-    <li><a href="/blockchain-ledger" ><span class="material-icons-outlined">account_balance_wallet</span> Blockchain Ledger</a></li>
-    <li><a href="/compliancereport"><span class="material-icons-outlined">assignment</span> Compliance Reports</a></li>
-    <li><a href="/settings"><span class="material-icons-outlined">settings</span> Settings</a></li>
+        <li><a href="/reportsubmit"><span class="material-icons-outlined">report</span> Incident Reports</a></li>
+        <li><a href="/threat-intelligence"><span class="material-icons-outlined">search</span> Threat Intelligence</a>
+        </li>
+        <li><a href="/blockchain-ledger"><span class="material-icons-outlined">account_balance_wallet</span> Blockchain
+            Ledger</a></li>
+        <li><a href="/compliancereport"><span class="material-icons-outlined">assignment</span> Compliance Reports</a>
+        </li>
+        <li><a href="/settings"><span class="material-icons-outlined">settings</span> Settings</a></li>
       </ul>
     </nav>
   </div>
@@ -207,9 +213,9 @@
     <h1><span class="material-icons-outlined">warning</span> Report Incident</h1>
     <div class="form-container">
       <h2>Report a New Incident</h2>
-      <form action="#" method="POST"> 
-        <label for="incidentType">Incident Type</label>
-        <select id="incidentType" name="incidentType" required>
+      <form action="/reportsubmit" method="POST">
+        <label for="incident_type">Incident Type</label>
+        <select id="incident_type" name="incident_type" required>
           <option value="">Select Incident Type</option>
           <option value="Phishing">Phishing</option>
           <option value="Ransomware">Ransomware</option>
@@ -229,20 +235,22 @@
         </select>
 
         <label for="description">Description</label>
-        <textarea id="description" name="description" placeholder="Describe the incident in detail..." required></textarea>
+        <textarea id="description" name="description" placeholder="Describe the incident in detail..."
+          required></textarea>
 
-        <label for="datetime">Date and Time</label>
-        <input type="datetime-local" id="datetime" name="datetime" required />
+        <label for="date_time">Date and Time</label>
+        <input type="datetime-local" id="date_time" name="date_time" required />
 
-        <label for="reporterName">Reporter Name</label>
-        <input type="text" id="reporterName" name="reporterName" required />
+        <label for="reporter_name">Reporter Name</label>
+        <input type="text" id="reporter_name" name="reporter_name" required />
 
-        <label for="reporterEmail">Reporter Email</label>
-        <input type="email" id="reporterEmail" name="reporterEmail" required />
+        <label for="reporter_email">Reporter Email</label>
+        <input type="email" id="reporter_email" name="reporter_email" required />
 
         <button type="submit">Submit Incident</button>
       </form>
     </div>
   </div>
 </body>
+
 </html>
