@@ -69,11 +69,13 @@ class ComplianceReport(db.Model):
 
 class ReportSubmission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150), nullable=False)
+    incident_type = db.Column(db.String(100), nullable=False)
+    severity = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    submitted_at = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    status = db.Column(db.String(50), default='Submitted')
+    date_time = db.Column(db.String(100), nullable=False)
+    reporter_name = db.Column(db.String(100), nullable=False)
+    reporter_email = db.Column(db.String(120), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class PricingPlan(db.Model):
@@ -229,7 +231,8 @@ def compliancereport():
 
 @app.route('/reportsubmit', methods=['GET', 'POST'])
 def reportsubmit():
-    if request.method == 'POST':
+
+     if request.method == 'POST':
         # Handle submitted data
         data = request.form.to_dict() if request.form else request.get_json()
         
@@ -243,11 +246,14 @@ def reportsubmit():
         send_incident_report(
             incident_type, severity, description, date_time, reporter_name, reporter_email
         )
+        new_report  = ReportSubmission(incident_type=incident_type,severity=severity, description=description, date_time=date_time, reporter_name=reporter_name, reporter_email=reporter_email, user_id=session.get("user_id"))
+        db.session.add(new_report)
+        db.session.commit()
 
         return render_template("reportsubmit.html", success=True)
 
     # If GET request → show the form
-    return render_template("reportsubmit.html")
+     return render_template("reportsubmit.html")
 
 
 
