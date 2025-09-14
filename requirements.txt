@@ -1,7 +1,10 @@
-Flask
-Flask-SQLAlchemy
-python-dotenv
-Werkzeug
+flask
+flask_sqlalchemy
+flask_bcrypt
 email-validator
-Flask-Bcrypt
-requests
+web3
+cryptography
+ipfshttpclient
+pyjwt
+python-dotenv
+

@@ -13,7 +13,8 @@ COPY . /app
 
 # Install dependencies
 RUN pip install --upgrade pip
-RUN pip install flask flask_sqlalchemy flask_bcrypt email-validator
+RUN pip install flask flask_sqlalchemy flask_bcrypt email-validator web3 cryptography ipfshttpclient pyjwt python-dotenv
+ 
 
 # Expose port (adjust if needed)
 EXPOSE 5000
