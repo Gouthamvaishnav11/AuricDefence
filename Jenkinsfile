@@ -9,18 +9,18 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Install Backend Dependencies') {
             steps {
-                sh 'docker build -t auricdefence:latest .'
+                sh '''
+                    pip3 install --upgrade pip
+                    pip3 install flask flask_sqlalchemy flask_bcrypt email-validator web3 cryptography ipfshttpclient pyjwt
+                '''
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Run Backend') {
             steps {
-                // Stop old container if running
-                sh 'docker rm -f auricdefence || true'
-                // Run new container
-                sh 'docker run -d -p 5000:5000 --name auricdefence auricdefence:latest'
+                sh 'nohup python3 app.py &'
             }
         }
     }
