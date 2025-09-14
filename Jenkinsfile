@@ -12,23 +12,7 @@ pipeline {
         stage('Install Backend Dependencies') {
             steps {
                 dir('backend') {
-                    sh 'pip install -r requirements.txt'
-                }
-            }
-        }
-
-        stage('Install Frontend Dependencies') {
-            steps {
-                dir('frontend') {
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Build Frontend') {
-            steps {
-                dir('frontend') {
-                    sh 'npm run build'
+                    sh 'pip3 install flask flask_sqlalchemy flask_bcrypt email-validator web3 cryptography ipfshttpclient pyjwt'
                 }
             }
         }
@@ -36,10 +20,9 @@ pipeline {
         stage('Run Backend') {
             steps {
                 dir('backend') {
-                    sh 'nohup python app.py &'
+                    sh 'nohup python3 app.py &'
                 }
             }
         }
     }
 }
-
